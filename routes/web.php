@@ -8,11 +8,15 @@ use App\Http\Controllers\SessionController;
 
 Route::get('/', [JobController::class, 'index']);
 
-// Regsiter create and store
-Route::get('/register', [RegisterUserController::class, 'create']);
-Route::post('/register', [RegisterUserController::class, 'store']);
 
+Route::middleware('guest')->group(function (){
+// Regsiter create and store
+    Route::get('/register', [RegisterUserController::class, 'create']);
+    Route::post('/register', [RegisterUserController::class, 'store']);
 // Login create sesstion and store and destroy
-Route::get('/login', [SessionController::class, 'create']);
-Route::post('/login', [SessionController::class, 'store']);
-Route::delete('/logout', [SessionController::class, 'destroy']);
+    Route::get('/login', [SessionController::class, 'create']);
+    Route::post('/login', [SessionController::class, 'store']);
+});
+
+
+Route::delete('/logout', [SessionController::class, 'destroy'])->middleware('auth');

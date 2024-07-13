@@ -24,7 +24,20 @@
             <a href="#">Companies</a>
 
         </div>
-        <div><a href="#"> Post Job</a></div>
+        @auth()
+        <div class="space-x-6 font-bold">
+            <a href="/jobs/create"> Post Job</a>
+            <a href="/logout">Log out</a>
+
+        </div>
+        @endauth
+        @guest()
+            <div class="space-x-6 font-bold">
+                <a href="/register">Sign Up</a>
+                <a href="/login">Log In</a>
+
+            </div>
+        @endguest
     </nav>
 
     <main class="mt-10 max-w-[986px] mx-auto">
