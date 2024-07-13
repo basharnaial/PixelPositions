@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\File;
@@ -9,11 +10,6 @@ use Illuminate\Validation\Rules\Password;
 
 class RegisterUserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-
     /**
      * Show the form for creating a new resource.
      */
@@ -28,6 +24,7 @@ class RegisterUserController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+
         $userAttributes = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users,email'],
@@ -35,22 +32,21 @@ class RegisterUserController extends Controller
         ]);
 
         $employerAttributes = $request->validate([
-            'name' => ['required'],
+            'employer' => ['required'],
             'logo' => ['required', File::types(['png', 'jpg', 'webp'])],
         ]);
 
-        // create user
         $user = User::create($userAttributes);
-        // create employer
+
         $logoPath = $request->logo->store('logos');
+
         $user->employer()->create([
             'name' => $employerAttributes['employer'],
             'logo' => $logoPath,
         ]);
+
         Auth::login($user);
-    return redirect('/');
+
+        return redirect('/');
     }
-
-
-
 }
