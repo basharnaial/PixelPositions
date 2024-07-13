@@ -10,6 +10,10 @@ use App\Http\Controllers\SessionController;
 
 Route::get('/', [JobController::class, 'index']);
 
+Route::get('/jobs/create', [JobController::class, 'create'])->middleware('auth');
+Route::post('/jobs', [JobController::class, 'store'])->middleware('auth');
+
+
 Route::get('/search', SearchController::class);
 
 // tags/frontend  we add :name to referes its to name to id because the default is /tags/name:id
