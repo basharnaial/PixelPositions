@@ -6,9 +6,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\CompanyController;
 
 
 Route::get('/', [JobController::class, 'index']);
+
+Route::get('/companies', [CompanyController::class, 'index']);
+Route::resource('companies', CompanyController::class);
 
 Route::get('/jobs/create', [JobController::class, 'create'])->middleware('auth');
 Route::post('/jobs', [JobController::class, 'store'])->middleware('auth');
