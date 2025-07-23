@@ -8,10 +8,9 @@ use App\Models\Job;
 // 2- run the test but test will fail
 // 3- wtite the code to make the code pass
 
-
 // هذا هو الاختبار الذي نتحقق من خلاله ما إذا كان الموديل Job ينتمي إلى الموديل Employer.
 test('its belongs to an employer', function () {
-    /// AAA Arrange, Act, Assert
+    // / AAA Arrange, Act, Assert
     // ترتيب (Arrange):
     // ننشئ موديل Employer باستخدام الفاكتوري
     $employer = Employer::factory()->create();
@@ -29,9 +28,8 @@ test('its belongs to an employer', function () {
     // toBeTrue() تحقق أن القيمة صحيحة، مما يعني أن الـ وظيفة تنتمي بالفعل إلى الموظف
 });
 
-
 it('can have tag', function () {
-   /// AAA
+    // / AAA
     $job = Job::factory()->create();
     $job->tag('FrontEnd');
     expect($job->tags)->toHaveCount(1);

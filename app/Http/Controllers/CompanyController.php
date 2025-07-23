@@ -13,6 +13,7 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::latest()->paginate(10);
+
         return view('companies.index', compact('companies'));
     }
 
@@ -34,12 +35,10 @@ class CompanyController extends Controller
         return redirect()->route('companies.index')->with('success', 'Company created successfully.');
     }
 
-
     public function show(Company $company)
     {
         return view('companies.show', compact('company'));
     }
-
 
     public function edit(Company $company)
     {
@@ -62,7 +61,7 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
+
         return redirect()->route('companies.index')->with('success', 'Company deleted!');
     }
-
 }
