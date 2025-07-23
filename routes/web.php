@@ -11,7 +11,7 @@ use App\Http\Controllers\CompanyController;
 
 Route::get('/', [JobController::class, 'index']);
 
-Route::get('/companies', [CompanyController::class, 'index']);
+
 Route::resource('companies', CompanyController::class);
 
 Route::get('/jobs/create', [JobController::class, 'create'])->middleware('auth');
@@ -32,5 +32,8 @@ Route::middleware('guest')->group(function (){
     Route::post('/login', [SessionController::class, 'store']);
 });
 
+
+Route::get('/companies', [CompanyController::class, 'index']);
+Route::get('companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
 
 Route::delete('/logout', [SessionController::class, 'destroy'])->middleware('auth');
